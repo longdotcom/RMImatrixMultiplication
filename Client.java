@@ -3,7 +3,7 @@ import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
+import java.io.*;
 import javax.swing.JOptionPane;
 
 public class Client {
@@ -93,16 +93,28 @@ public class Client {
             throws MalformedURLException, RemoteException, NotBoundException {
               Registry registry = LocateRegistry.getRegistry(args[0]);
         look_up = (RemoteInterface) registry.lookup("MyServer");
-
-        int A[][] = {{1, 2, 3, 4},
-                {5, 6, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16}};
-
-        int B[][] = {{1, 2, 3, 4},
-                {5, 6, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16}};
+        
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter value of n");
+        int n=Integer.parseInt(br.readLine());
+        int A[][]=new int[n][n];
+        int B[][]=new int[n][n];
+        System.out.println("Enter elements of matrix A");
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                A[i][j]=Integer.parseInt(br.readLine());
+            }
+        }
+        System.out.println("Enter elements of matrix B");
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                B[i][j]=Integer.parseInt(br.readLine());
+            }
+        }
 
         multiplyMatrixBlock(A, B);
 
